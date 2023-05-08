@@ -16,7 +16,7 @@ jobs:
       - name: Run hadolint          #j' exécute une analyse Dockerfile avec hadolint en utilisant les règles par défaut.
         run: docker run --rm -i hadolint/hadolint < Dockerfile
       - name: Run super-linter     #j'utilise l'action github/super-linter pour exécuter super-linter uniquement si l'événement provient d'un pull_request.
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' #on execute super-linter , uniquement si l'événement provient d'un pull_request
         uses: github/super-linter@v5
         with:
           lint-tools: all         #pour configurer .......
