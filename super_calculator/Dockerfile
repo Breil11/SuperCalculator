@@ -14,8 +14,8 @@ FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
 
-COPY --from=build /super_calculator /super_calculator
+COPY --from=build /calculator /calculator
 
 USER nonroot:nonroot
 
-ENTRYPOINT ["/super_calculator"]
+ENTRYPOINT ["/calculator"]
