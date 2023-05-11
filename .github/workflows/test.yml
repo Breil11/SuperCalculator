@@ -5,6 +5,7 @@ on:        # le workflow est déclenché pour chaque push sur la branche princip
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   test:
