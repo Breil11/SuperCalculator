@@ -1,37 +1,29 @@
-name: Unit Tests
+name: Run Tests
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  unit-tests:
+  test:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         go-version: [1.17, 1.18, 1.19]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
 
-      - name: Set up Go ${{ matrix.go-version }}
-        uses: actions/setup-go@v2
-        with:
-          go-version: ${{ matrix.go-version }}
+    - name: Setup Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go-version }}
 
-      - name: Install dependencies
-        run: go mod download
-      - name: Configure GitHub credentials
-        env:
-         GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-        run: |
-         git config --global user.email "actions@github.com"
-         git config --global user.name "GitHub Actions"
+    - name: Download Dependencies
+      run: go mod download
 
-      - name: Run tests
-        run: |
-         go get github.com/spf13/cobra
-         go get github.com/spf13/cobrago test ./...
+    - name: Run Tests
+      run: go test ./...
