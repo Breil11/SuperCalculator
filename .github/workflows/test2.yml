@@ -26,4 +26,6 @@ jobs:
         run: go mod download
 
       - name: Run tests
-        run: go test ./...
+        run: |
+         go get github.com/spf13/cobra
+         go get github.com/spf13/cobrago test ./...
